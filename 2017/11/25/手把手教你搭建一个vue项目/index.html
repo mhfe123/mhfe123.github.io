@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=44218032" charset="UTF-8"></script>
+  <script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?7192fa361f5cabb11d8a22de41c1ba8f";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+  
+  <title>手把手教你vue+webpack项目搭建 | SleepCat</title>
+  <meta name="author" content="sleepcat">
+  
+  <meta name="description" content="vue+webpack项目搭建1.首先搭建项目基本结构
+12345src文件夹:项目源代码所在的文件夹	main.js 项目打包入口的文件	App.vue 项目启动之后用户看到的第一个组件package.json 项目描述文件webpack.config.dev.js ： 开发阶段的webpack的">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="手把手教你vue+webpack项目搭建"/>
+  <meta property="og:site_name" content="SleepCat"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/imgs/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="SleepCat" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header><div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/imgs/logo.png" alt="SleepCat" title="SleepCat"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name">SleepCat</h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li> <a href="/atom.xml">RSS</a> </li>
+				</ul>
+			</nav>			
+</div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header class="article-info clearfix">
+  <h1 itemprop="name">
+	手把手教你vue+webpack项目搭建
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="sleepcat">sleepcat</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2017-11-25T03:23:33.000Z" itemprop="datePublished">2017-11-25</time>
+    更新日期:<time datetime="2017-12-25T06:02:23.609Z" itemprop="dateModified">2017-12-25</time>
+    
+  </p>
+</header>
+    <div class="entry">
+		
+        <h2 id="vue-webpack项目搭建"><a href="#vue-webpack项目搭建" class="headerlink" title="vue+webpack项目搭建"></a>vue+webpack项目搭建</h2><p>1.首先搭建项目基本结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">src文件夹:项目源代码所在的文件夹</span><br><span class="line">	main.js 项目打包入口的文件</span><br><span class="line">	App.vue 项目启动之后用户看到的第一个组件</span><br><span class="line">package.json 项目描述文件</span><br><span class="line">webpack.config.dev.js ： 开发阶段的webpack的配置文件</span><br></pre></td></tr></table></figure>
+<p>2.编写基本配置代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">1.在app.vue中写项目启动所要呈现的内容,写在template之间</span><br><span class="line">2.在main.js中引入App.vue</span><br><span class="line">  使用vue框架把App.vue作为项目启动后用户看到的第一个组件</span><br><span class="line">  	安装vue: cnpm i vue --save</span><br><span class="line">	创建根实例，在根实例中，让我们的框架第一个显示App.vue,代码如下:</span><br><span class="line">	new Vue (&#123;</span><br><span class="line">      el:&apos;#app&apos;,</span><br><span class="line">      render:h=&gt;h(App)//function(createElement)&#123;return createElement(App)&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">3、在webpack.config.dev.js中配置打包的指令</span><br><span class="line">	entry:&apos;main.js路径&apos;//入口</span><br><span class="line">	loader: </span><br><span class="line">		安装`vue-loader`对我们.vue结尾的文件打包		</span><br><span class="line">4、使用`html-webpack-plugin`，来根据参照文件(template.html)，生成一个index.html</span><br><span class="line">	4.1、先写好template中的内容，里面要写上id=app的div</span><br><span class="line">	4.2、安装`html-webpack-plugin`插件，在webpack.config.dev.js中写好代码</span><br><span class="line">		参考:https://github.com/jantimon/html-webpack-plugin		</span><br><span class="line">5、使用 webpack-dev-server 打包</span><br><span class="line">	在我们项目的根目录下，运行下面的代码:</span><br><span class="line">		webpack-dev-server --progress --config webpack.config.dev.js --open --port 6008 --hot</span><br><span class="line">		</span><br><span class="line">	解释:</span><br><span class="line">		--progress 查看打包进度</span><br><span class="line">		--config xxx.js 指定打包的配置文件</span><br><span class="line">		--open 打开默认浏览器</span><br><span class="line">		--port 6008 指定打开的端口，如果不指定，默认是8080</span><br><span class="line">		--hot 启动热重载，告诉vue-loader可以进行热重载了</span><br><span class="line">注意：</span><br><span class="line">	开发阶段，我们生成的index.html及bundle.js都发布到`webpack-dev-server`这个服务器上面去了，我们在项目里面是看不到生成的实实在在的这些文件的</span><br></pre></td></tr></table></figure>
+<p>3.配置路由</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>一般编写移动端的页面时会用到基于vue的mint-ui的一个组件库</span><br><span class="line">安装:cnpm i mint-ui --save/-S</span><br><span class="line">在main.js中集成到项目中</span><br><span class="line">	<span class="keyword">import</span> MintUI <span class="keyword">from</span> <span class="string">'mint-ui'</span>;</span><br><span class="line">	<span class="keyword">import</span> <span class="string">'mint-ui/lib/style.css'</span>;</span><br><span class="line">	Vue.use(MintUI);</span><br><span class="line"><span class="number">2.</span>配置路由</span><br><span class="line">	<span class="number">2.1</span>安装vue-router:npm i vue-router -S</span><br><span class="line">	<span class="number">2.2</span>集成到项目中:</span><br><span class="line">		<span class="keyword">import</span> vueRouter <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line">		Vue.use(vueRouter);<span class="comment">//这时候vue对象的原型里就有了$router,$route两个方法</span></span><br><span class="line">	<span class="number">2.3</span>将需要使用路由加载的vue组件文件引入</span><br><span class="line">    	<span class="keyword">import</span> home <span class="keyword">from</span> <span class="string">'./components/home/home.vue'</span></span><br><span class="line">	<span class="number">2.4</span>创建路由的实例对象,并将组件与路由路径进行绑定</span><br><span class="line">		<span class="keyword">const</span> router = <span class="keyword">new</span> vueRouter(&#123;</span><br><span class="line">          routes:[</span><br><span class="line">            &#123;<span class="attr">path</span>:<span class="string">'/'</span>,<span class="attr">redirect</span>:<span class="string">'/home'</span>&#125;,<span class="comment">//路由重定向,将默认跟组件重新定向指向首页模块</span></span><br><span class="line">            &#123;path<span class="string">'/home'</span>,<span class="attr">component</span>:home&#125;<span class="comment">//将home组件与/home这个路由路径绑定</span></span><br><span class="line">          ]</span><br><span class="line">		&#125;)</span><br><span class="line">     <span class="number">2.5</span>将路由的实例对象router注入到vue的根实例中<span class="keyword">new</span> Vue(&#123;router&#125;)</span><br><span class="line"><span class="number">3.</span>将文件根据路由路径绑定的组件加载到相应的位置</span><br><span class="line">	 &lt;router-view <span class="class"><span class="keyword">class</span></span>=<span class="string">"routerViewStyle"</span>&gt;&lt;/router-view&gt;//路由出口,所有路由加载的组件都从这里显示到页面</span><br><span class="line">4.实现页面的跳转,即加载不同的组件</span><br><span class="line">	&lt;router-link to="/news/newslist"&gt;</span><br><span class="line">        &lt;span class="mui-icon mui-icon-home"&gt;&lt;/span&gt;</span><br><span class="line">        &lt;div class="mui-media-body"&gt;新闻咨询&lt;/div&gt;</span><br><span class="line">     &lt;/router-link&gt;</span><br><span class="line">//将需要点击跳转的部分用router-link标签包裹,to属性内写的是要跳转的路由地址(声明式导航)</span><br></pre></td></tr></table></figure>
+<p>4.获取数据信息</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>用vue-resource发送网络请求获取数据</span><br><span class="line">	<span class="number">1.1</span>安装:npm i vue-resource -S</span><br><span class="line">	<span class="number">1.2</span>集成到项目中</span><br><span class="line">    	<span class="keyword">import</span> vueResource <span class="keyword">from</span> <span class="string">'vue-resource'</span></span><br><span class="line">		Vue.use(vueResource);<span class="comment">//vue原型对象中会多出$http的对象(vue-resource对象)</span></span><br><span class="line">	<span class="number">1.3</span>使用方法 </span><br><span class="line">    	<span class="keyword">this</span>.$http.get(url).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(res)&#125;)</span><br><span class="line">		<span class="keyword">this</span>.$http.post(url,&#123;要传递的数据(对象)&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(res)&#125;)</span><br><span class="line">	<span class="comment">//注意:因为vue-resource已经不再更新,所以推荐用axios发送网络请求</span></span><br><span class="line"><span class="number">2.</span>用axios发送网络请求</span><br><span class="line">	<span class="number">1.1</span>安装:npm i axios -S</span><br><span class="line">	<span class="number">1.2</span>集成到项目中</span><br><span class="line">    	<span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line">		Vue.prototype.$axios = axios;<span class="comment">//vue原型对象中会多出$axios的对象,及他的方法</span></span><br><span class="line">	<span class="number">1.3</span>使用方法 </span><br><span class="line">    	<span class="keyword">this</span>.$axios.get(url).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(res)&#125;)</span><br><span class="line">		<span class="keyword">this</span>.$axios.post(url,&#123;要传递的数据(对象)&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(res)&#125;)<span class="comment">//json类型</span></span><br><span class="line">		<span class="keyword">this</span>.$axios.post(url,<span class="string">'content='</span> + content).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(res)&#125;)<span class="comment">//键值对类型</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+    <footer>
+        
+        
+		<div class="bdsharebuttonbox">
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_count" data-cmd="count"></a>
+</div>
+<script>
+window._bd_share_config=
+{
+	"common":{
+		"bdSnsKey":{},
+		"bdText":"",
+		"bdMini":"2",
+		"bdMiniList":false,
+		"bdPic":"",
+		"bdStyle":"0",
+		"bdSize":"24"
+	},
+	"share":{},
+	"image":{
+		"viewList":["qzone","tsina","tqq","renren","weixin","fbook","twi"],
+		"viewText":"分享到：",
+		"viewSize":"24"
+	},
+	"selectShare":{
+		"bdContainerClass":null,
+		"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","fbook","twi"]
+	}
+};
+with(document)0[
+	(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)
+];
+</script>    
+        <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+ <nav id="pagination" >
+    
+    <a href="/2017/12/25/hello-world/" class="alignleft prev" title="Hello World">Hello World</a>
+    
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+	
+	<section id="comment">
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="2017/11/25/手把手教你搭建一个vue项目/" data-title="手把手教你vue+webpack项目搭建" data-url="http://yoursite.com/2017/11/25/手把手教你搭建一个vue项目/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:""};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+		<!-- 多说公共JS代码 end -->
+	</section>
+	
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+
+  
+
+  
+
+  <iframe width="100%" height="140" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1923610190&verifier=6af5ad6a&colors=fafafa,fafafa,666666,0082cb,ecfbfd&dpc=1"></iframe>
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://opiece.me" title="Chillax's Blog" target="_blank">Chillax</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hi,I&#39;m the designer of this theme. <br/>
+			You can download this theme on my github.</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/1923610190" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/huangjunhui" target="_blank" title="github"></a>
+		
+		
+		<a href="https://www.facebook.com/huangjunhui" target="_blank" title="facebook"></a>
+		
+		
+		
+		<a href="mailto:jhhuang1993@foxmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/huangjunhui/concise" target="_blank" title="Concise">Concise</a> © 2017 
+		
+		<a href="http://yoursite.com/about" target="_blank" title="sleepcat">sleepcat</a>
+		
+		</p>
+</div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/counter.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<div id="totop" style="position:fixed;bottom:100px;right:10px;cursor: pointer;">
+<a title="返回顶部"><img src="/imgs/scrollup.png"/></a>
+</div>
+<script src="/js/totop.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+
+
